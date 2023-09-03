@@ -1,3 +1,19 @@
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+import time
+import random
+import math
+from matplotlib.pyplot import figure
+from numba import jit
+import matplotlib.colors as colors
+from numba import int64, int32, float32, float64, prange, types   # import the types
+from numba.experimental import jitclass
+from numba.typed import List
+from numba import njit
+from numba import prange
+from scipy.spatial import Delaunay
+
 spec = [("x", float64),("y",float64),("u",float64),("v",float64),("radius",float64),("list_pos",int64)]
 @jitclass(spec)
 class Particle():
