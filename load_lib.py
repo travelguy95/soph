@@ -64,7 +64,7 @@ obstruct_u = np.load("/content/soph/obstruct_u.npy")
 obstruct_v = np.load("/content/soph/obstruct_v.npy")
 obstruct_copy = np.load("/content/soph/obstruct_copy.npy")
 
-@jit(nopython=True)
+@jit(("obstruct",float64[:,:]), nopython=True)
 def run_code(rows,cols,steps,obstruct=np.array([[]]),obstruct_u=np.array([[]]),obstruct_v=np.array([[]])):
   h = 1 
   my_particles = []
