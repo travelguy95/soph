@@ -14,6 +14,11 @@ from numba import njit
 from numba import prange
 from scipy.spatial import Delaunay
 
+obstruct = np.load("/content/soph/obstruct.npy")
+obstruct_u = np.load("/content/soph/obstruct_u.npy")
+obstruct_v = np.load("/content/soph/obstruct_v.npy")
+obstruct_copy = np.load("/content/soph/obstruct_copy.npy")
+
 spec = [("x", float64),("y",float64),("u",float64),("v",float64),("radius",float64),("list_pos",int64)]
 @jitclass(spec)
 class Particle():
@@ -58,11 +63,6 @@ def border_collide(self,rows,cols):
   if obstruct[math.floor(self.y)][math.floor(self.x)] == 99:
     self.x = self.x - dt*self.u
     self.y = self.y + dt*self.v
-
-obstruct = np.load("/content/soph/obstruct.npy")
-obstruct_u = np.load("/content/soph/obstruct_u.npy")
-obstruct_v = np.load("/content/soph/obstruct_v.npy")
-obstruct_copy = np.load("/content/soph/obstruct_copy.npy")
 
 @jit('int64,int64,int64,int64[:,:],float64[:,:],float64[:,:]', nopython=True)
 def run_code(rows,cols,steps,obstruct=np.array([[]]),obstruct_u=np.array([[]]),obstruct_v=np.array([[]])):
